@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Airbnb</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../static/css/mystyle.css" />
+    <link rel="shortcut icon" href="../static/images/favicon.png" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/images/icons/css/all.min.css" />
+    <script src="../static/images/icons/js/all.min.js"></script>
+    <script>
+      function login() {
+        window.location.href = "signin.html";
+      }
+
+      function myBooking() {
+        window.location.href = "booking.html";
+      }
+
+      function performSearch() {
+        const location = document.getElementById("locationInput").value;
+        const checkIn = document.getElementById("checkInInput").value;
+        const checkOut = document.getElementById("checkOutInput").value;
+        const guests = document.getElementById("guestsInput").value;
+
+        if (location && checkIn && checkOut && guests) {
+          window.location.href = `search.html?location=${location}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${guests}`;
+        } else {
+          alert("Please fill in all search fields.");
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+      }
+      .card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        width: 300px;
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: scale(1.05);
+      }
+      .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .card .details {
+        padding: 15px;
+      }
+      .card .details h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2em;
+      }
+      .card .details p {
+        margin: 0 0 5px 0;
+        color: #555;
+      }
+      .card .details .price {
+        font-size: 1.1em;
+        color: #333;
+      }
+      .card .details .rating {
+        color: #ffd700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <p class="top-text">Latest News about our response against COVID-19</p>
+    </div>
+    <script src="../Airbnb/js/script.js"></script>
+
+    <div class="background">
+      <div class="menu-container">
+        <div class="menu-flex">
+          <img src="../static/images/logo.png" class="logo" />
+        </div>
+        <div class="menu-flex">
+          <div class="menus">
+            <div class="item-menu">
+              <a href="stays.html" style="text-decoration: none; color: black"
+                >Stays</a
+              >
+            </div>
+            <div class="item-menu">Experiences</div>
+            <div class="item-menu">Online Experiences</div>
+          </div>
+        </div>
+        <div class="menu-flex">
+          <div class="right-menu">
+            <div class="right-menu-item">
+              <button class="menu-button">Become a Host</button>
+              <button class="menu-globe">
+                <span class="material-icons globe">language</span>
+              </button>
+              <div class="button-icons">
+                <span class="material-icons iconMenu">menu</span>
+                <span class="material-icons iconUser">account_circle</span>
+                <span class="material-icons iconDot">fiber_manual_record</span>
+                <i class="fa-solid fa-circle iconCircle"></i>
+              </div>
+              <button id="loginButton" class="menu-button" onclick="login()">
+                Login
+              </button>
+              <button
+                id="bookingButton"
+                class="menu-button"
+                onclick="myBooking()"
+              >
+                My Booking
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nature">
+        <div class="the-best-of-nature-top">The best of nature</div>
+        <p class="suggestions">Suggestions of favourites on Airbnb.</p>
+        <button class="inspire-button">Inspire yourself</button>
+      </div>
+    </div>
+    <br /><br />
+    <b class="explore">Explore places around you</b>
+    <div class="container">
+      {% for property in properties %}
+      <div class="card">
+        <img src="{{ property.image_url }}" alt="{{ property.name }}" />
+        <div class="details">
+          <h3>{{ property.name }}</h3>
+          <p>{{ property.location }}</p>
+          <p>{{ property.date_range }}</p>
+          <p class="price">{{ property.price }}/night</p>
+          <p class="rating">★ {{ property.rating }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
